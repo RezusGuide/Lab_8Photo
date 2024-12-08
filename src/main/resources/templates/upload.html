@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Photo Upload</title>
+</head>
+<body>
+<h1>Upload Photo</h1>
+
+<form th:action="@{/upload}" method="post" enctype="multipart/form-data">
+    <label for="file">Choose a photo:</label>
+    <input type="file" id="file" name="file" required>
+    <br><br>
+    <button type="submit">Upload</button>
+</form>
+
+<div th:if="${successMessage}" style="color: green;">
+    <p th:text="${successMessage}"></p>
+</div>
+
+<div th:if="${errorMessage}" style="color: red;">
+    <p th:text="${errorMessage}"></p>
+</div>
+
+<h2>Uploaded Photos:</h2>
+
+<div th:each="photo : ${photos}">
+    <div>
+        <img th:src="@{${photo.imageLink}}" alt="Uploaded Image">
+        <p th:text="${photo.fileName}"></p>
+    </div>
+</div>
+
+</body>
+</html>
